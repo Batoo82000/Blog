@@ -2,41 +2,37 @@
 
 namespace App\Controller;
 
+use App\Services\CategoriesServices;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogController extends AbstractController
 {
+    public function __construct(CategoriesServices $categoriesServices){
+        $categoriesServices->updateSession();
+    }
     #[Route('/', name: 'app_hello')]
-    public function hello(Request $request ,ArticleRepository $repoArticle, CategoryRepository $repoCat): Response
+    public function hello(ArticleRepository $repoArticle): Response
     {
         $articles = $repoArticle->findAll();
-        $categories = $repoCat->findAll();
-
-        $session = $request->getSession();
-        $session->set("categories", $categories);
         
-
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
             'article' => $articles,
-            // 'categories' => $categories,
         ]);
     }
     #[Route('/article/{slug}', name: 'app_single_article')]
-    public function single(ArticleRepository $repoArticle, string $slug, CategoryRepository $repoCat): Response
+    public function single(ArticleRepository $repoArticle, string $slug): Response
     {
         $article = $repoArticle->findOneBySlug($slug);
-        $categories = $repoCat->findAll();
+
 
         return $this->render('blog/single.html.twig', [
             'controller_name' => 'BlogController',
-            'article' => $article,
-            'categories' => $categories,
+            'article' => $article
         ]);
     }
     #[Route('/category/{slug}', name: 'app_article_by_category')]
@@ -48,13 +44,11 @@ class BlogController extends AbstractController
             $articles = $category->getArticles()->getValues();
         }
 
-        $categories = $repoCat->findAll();
 
         return $this->render('blog/article_by_category.html.twig', [
             'controller_name' => 'BlogController',
             'articles' => $articles,
-            'category' => $category,
-            'categories' => $categories,
+            'category' => $category
         ]);
     }
 

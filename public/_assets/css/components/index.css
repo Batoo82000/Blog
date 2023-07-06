@@ -17,8 +17,24 @@ header h2{
 }
 .container{
     width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
+    max-width: 1500px;
+    margin: 50px auto;
+    min-height: 60vh;
+}
+.flex{
+    display: flex;
+}
+.flex-1{
+    flex:1;
+}
+.wrap{
+    flex-wrap: wrap;
+}
+.aic{
+    align-items: center;
+}
+.jcc{
+    justify-content: center;
 }
 a{
     color: inherit;

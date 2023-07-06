@@ -1,0 +1,50 @@
+.form-group {
+  flex-direction: column;
+  margin: 5px 0;
+  width: 100%;
+}
+form textarea {
+  border: 1px solid #ccc;
+  resize: none;
+}
+form select,
+form input {
+  min-height: 30px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+form input {
+  order: 1;
+  padding: 0 10px;
+  width: 100%;
+}
+form {
+  max-width: 600px;
+  width: 90%;
+  margin: auto;
+  height: 100%;
+}
+
+form .label-container{
+    width: 150px;
+    overflow: hidden;
+}
+form ul  {
+  margin: 0;
+  padding: 0;
+  order: 2;
+}
+form ul li {
+  color:red;
+  height: 45px;
+}
+.success{
+  color: green;
+}
+.danger{
+  color:red;
+}
+form .btn{
+
+  width: 100%;
+}

@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ContactRepository;
+
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ContactRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
@@ -15,22 +17,36 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?string $full_name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Email(mode : "strict")]
+    #[Assert\Email(message: "L'email {{ value }} n'est pas un email valide.")]
+    #[Assert\NotBlank(message: "Vous devez indiquer un email.")]
+    private ?string $email = null;
+
+
+    #[ORM\Column(length: 255)]
+    #[Assert\Length(
+        min: 6,
+        minMessage: 'Votre sujet doit avoir au moins une longueur de {{ limit }} charactères'
+    )]
     private ?string $subject = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(
+        min: 40,
+        minMessage: 'Votre message doit avoir au moins une longueur de {{ limit }} charactères'
+    )]
     private ?string $message = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    private ?bool $readed = null;
+    private ?bool $readed = false;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;

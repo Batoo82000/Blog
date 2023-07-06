@@ -21,15 +21,7 @@
     border-radius: 100%;
     border: 1px solid #1d1d1d;
 }
-.flex{
-    display: flex;
-}
-.wrap{
-    flex-wrap: wrap;
-}
-.aic{
-    align-items: center;
-}
+
 .articles .article-item .article-title{
     font-size: 1.2rem;
 }

@@ -11,6 +11,7 @@
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.15",
+        "egulias/email-validator": "^4.0",
         "espero-soft/dateformat": "dev-master",
         "espero-soft/faker": "dev-master",
         "phpdocumentor/reflection-docblock": "^5.3",
